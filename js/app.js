@@ -2,15 +2,9 @@
  * Create a list that holds all of your cards
  */
 const container = document.querySelector('.container');
-let deck = document.querySelector('.deck');
-let cards = deck.getElementsByClassName('card');
 
-function sleep(milliseconds){
-  const t0 = performance.now();
-  while(performance.now() < t0 + milliseconds){
+const cards = document.getElementsByClassName('card');
 
-  }
-}
 
 /*
  * Display the cards on the page
@@ -36,12 +30,14 @@ function shuffle(array) {
 }
 
 // Replace old elements with new shuffled elements
-function replace(){
+function replaceDeck(){
+  let deck = document.querySelector('.deck');
   const newDeck = document.createElement('ul');
   newDeck.className = 'deck';
   const array = shuffle([...cards]);
 
   for(let i=0; i<array.length; i++){
+    array[i].className = 'card';
     newDeck.appendChild(array[i]);
   }
 
@@ -49,7 +45,7 @@ function replace(){
   container.appendChild(newDeck);
 }
 
-replace();
+replaceDeck();
 
 /*
  * set up the event listener for a card. If a card is clicked:
@@ -62,12 +58,14 @@ replace();
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
 
-deck = document.querySelector('.deck');
+
 let openCards = [];
 let oldCard, newCard;
 let moves = 0;
 let stars = 3;
-deck.addEventListener('click', cardClicked);
+let resetButton = document.querySelector('.fa-repeat');
+
+container.addEventListener('click', cardClicked);
 
 function cardClicked(eve){
   if(eve.target.nodeName === 'LI'){
@@ -136,3 +134,12 @@ function starring(visualStars){
   starsArr[visualStars].firstElementChild.classList.replace('fa-star', 'fa-star-o');
   console.log(stars);
 }
+
+resetButton.addEventListener('click', function(){
+  moves = 0;
+  insertMoves();
+  stars = 3;
+  document.querySelector('.stars').innerHTML = '<li><i class="fa fa-star"></i></li><li><i class="fa fa-star"></i></li><li><i class="fa fa-star"></i></li>';
+  openCards = [];
+  replaceDeck();
+});
