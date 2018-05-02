@@ -69,6 +69,10 @@ let interval;
 let time = 0;
 let minutes = document.querySelector('.minutes');
 let seconds = document.querySelector('.seconds');
+let matches = 8;
+let deckContainer = document.querySelector('.container');
+let winContainer = document.querySelector('.win');
+let restartButton = winContainer.querySelector('button');
 
 container.addEventListener('click', cardClicked);
 
@@ -94,6 +98,10 @@ function cardClicked(eve){
           openCards[0].classList.add('match');
           openCards[1].classList.add('match');
           openCards = [];
+          matches -= 1;
+          if (!matches){
+            win();
+          }
         }
         else{
           openCards[1].classList.add('open');
@@ -155,6 +163,7 @@ function reset(){
   clicks = 0;
   clearInterval(interval);
   time = 0;
+  matches = 8;
   minutes.textContent = '00';
   seconds.textContent = '00';
   replaceDeck();
@@ -170,3 +179,29 @@ function timer(){
     reset();
   }
 }
+
+function win(){
+  clearInterval(interval);
+
+  let movesSpan = winContainer.querySelector('.moves');
+  let starsSpan = winContainer.querySelector('.stars');
+  let scorePanelTime = document.querySelector('time');
+  let timeSpan = winContainer.querySelector('.time');
+
+  movesSpan.textContent = moves + ' moves';
+  starsSpan.textContent = stars + (stars===1? ' star': ' stars');
+  timeSpan.innerHTML = 'in ';
+  timeSpan.appendChild(scorePanelTime.cloneNode(true));
+  let tempMinIndicator = document.createElement('span');
+  tempMinIndicator.textContent = ' minutes';
+  timeSpan.appendChild(tempMinIndicator);
+
+  deckContainer.classList.add('hidden');
+  winContainer.classList.remove('hidden');
+}
+
+restartButton.addEventListener('click', function(){
+  deckContainer.classList.remove('hidden');
+  winContainer.classList.add('hidden');
+  reset();
+});

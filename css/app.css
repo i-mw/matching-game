@@ -145,3 +145,53 @@ h1 {
   float: right;
   cursor: pointer;
 }
+
+
+/*
+ * Styles for Congratulations panel!
+ */
+
+ .hidden {
+   display: none;
+ }
+
+.win * {
+  margin: 0;
+  padding: 0;
+}
+
+.win {
+    color: #02ccba;
+    font-size: 20px;
+    padding-top: 150px;
+}
+
+ .win i {
+   color: #02ccba;
+   font-size: 120px;
+ }
+
+.win h1 {
+  margin-top: 20px;
+}
+
+.win p:first-of-type {
+  margin-top: 25px;
+}
+
+.win button {
+  margin-top: 25px;
+  font-size: 17px;
+  width: 130px;
+  height: 40px;
+  color: white;
+  background-color: #02ccba;
+  border: none;
+  transition: color 200ms;
+  transition: background-color 200ms;
+}
+
+.win button:active {
+  color: #02ccba;
+  background-color: white;
+}
