@@ -63,13 +63,22 @@ let openCards = [];
 let oldCard, newCard;
 let moves = 0;
 let stars = 3;
+let clicks = 0;
 let resetButton = document.querySelector('.fa-repeat');
+let interval;
+let time = 0;
+let minutes = document.querySelector('.minutes');
+let seconds = document.querySelector('.seconds');
 
 container.addEventListener('click', cardClicked);
 
 function cardClicked(eve){
   if(eve.target.nodeName === 'LI'){
-
+      if(!clicks){
+        clicks = 1;
+        timer();
+        interval = window.setInterval(timer, 1000);
+      }
       if(openCards.length === 0){
         openCards.push(eve.target);
         openCards[0].classList.add('open');
@@ -135,11 +144,29 @@ function starring(visualStars){
   console.log(stars);
 }
 
-resetButton.addEventListener('click', function(){
+resetButton.addEventListener('click', reset);
+
+function reset(){
   moves = 0;
   insertMoves();
   stars = 3;
   document.querySelector('.stars').innerHTML = '<li><i class="fa fa-star"></i></li><li><i class="fa fa-star"></i></li><li><i class="fa fa-star"></i></li>';
   openCards = [];
+  clicks = 0;
+  clearInterval(interval);
+  time = 0;
+  minutes.textContent = '00';
+  seconds.textContent = '00';
   replaceDeck();
-});
+}
+
+function timer(){
+  time += 1;
+  if(time < 3600){
+    minutes.textContent = Math.floor(time/60) > 9 ? Math.floor(time/60) : '0' + Math.floor(time/60);
+    seconds.textContent = time%60 > 9 ? time%60 : '0' + time%60;
+  }
+  else {
+    reset();
+  }
+}
