@@ -60,23 +60,64 @@ h1 {
   justify-content: center;
   align-items: center;
   box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
+  transform: rotateY(180deg);
+  transition-property: transform;
+  transition-duration: 500ms;
 }
 
 .deck .card.open {
-  transform: rotateY(0);
+  transform: rotateY(360deg);
   background: #02b3e4;
   cursor: default;
-}
-
-.deck .card.show {
   font-size: 33px;
 }
 
+/* .deck .card.show {
+
+} */
+
 .deck .card.match {
+  transform: rotateY(360deg);
   cursor: default;
   background: #02ccba;
   font-size: 33px;
+  /* animation: shake 0.7s cubic-bezier(.5,.5,.55,.5) both;
+  transform: translate3d(0, 0, 0); */
 }
+
+.deck .card.unmatch {
+  transform: rotateY(180deg);
+  transition: transform 2000ms;
+  font-size: 0;
+
+}
+
+.shake {
+  animation: shake 0.7s cubic-bezier(.36,.07,.19,.97) both;
+  transform: translate3d(0, 0, 0);
+  background-color: orangered !important;
+  /* backface-visibility: hidden;
+  perspective: 1000px; */
+}
+
+@keyframes shake {
+  10%, 90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+
+  20%, 80% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  30%, 50%, 70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+
+  40%, 60% {
+    transform: translate3d(4px, 0, 0);
+  }
+}
+
 
 /*
  * Styles for the Score Panel

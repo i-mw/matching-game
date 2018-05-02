@@ -2,8 +2,15 @@
  * Create a list that holds all of your cards
  */
 const container = document.querySelector('.container');
-const deck = document.querySelector('.deck');
+let deck = document.querySelector('.deck');
 let cards = deck.getElementsByClassName('card');
+
+function sleep(milliseconds){
+  const t0 = performance.now();
+  while(performance.now() < t0 + milliseconds){
+
+  }
+}
 
 /*
  * Display the cards on the page
@@ -54,3 +61,65 @@ replace();
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
+
+deck = document.querySelector('.deck');
+let openCards = [];
+let oldCard, newCard;
+let moves = 0;
+deck.addEventListener('click', cardClicked);
+
+function cardClicked(eve){
+  if(eve.target.nodeName === 'LI'){
+
+      if(openCards.length === 0){
+        openCards.push(eve.target);
+        openCards[0].classList.add('open');
+        moves += 1;
+        insertMoves();
+      }
+      else if(openCards.length === 1 && !eve.target.classList.contains('open') && !eve.target.classList.contains('match')){
+        openCards.push(eve.target);
+        moves += 1;
+        insertMoves();
+        if(openCards[0].firstElementChild.classList[1] === openCards[1].firstElementChild.classList[1]){
+          openCards[0].classList.remove('open');
+          openCards[0].classList.add('match');
+          openCards[1].classList.add('match');
+          openCards = [];
+        }
+        else{
+          openCards[1].classList.add('open');
+          // openCards[0].classList.remove('open');
+          // openCards[0].classList.add('unmatch');
+          // eve.target.classList.add('unmatch');
+          openCards[0].classList.add('shake');
+          openCards[1].classList.add('shake');
+          oldCard = openCards[0];
+          newCard = openCards[1];
+          newCard.addEventListener('animationend', function(){
+            // console.log(openCard);
+            oldCard.classList.remove('open', 'shake');
+            newCard.classList.remove('open', 'shake');
+            openCards = [];
+          });
+
+        }
+      }
+      else {
+        if(!eve.target.classList.contains('open') && !eve.target.classList.contains('match')){
+          oldCard.classList.remove('open', 'shake');
+          newCard.classList.remove('open', 'shake');
+          openCards = [];
+          openCards.push(eve.target);
+          openCards[0].classList.add('open');
+          moves += 1;
+          insertMoves();
+        }
+      }
+  }
+  console.log(moves);
+}
+
+function insertMoves(){
+  document.querySelector('.moves').textContent = moves;
+}
