@@ -66,6 +66,7 @@ deck = document.querySelector('.deck');
 let openCards = [];
 let oldCard, newCard;
 let moves = 0;
+let stars = 3;
 deck.addEventListener('click', cardClicked);
 
 function cardClicked(eve){
@@ -122,4 +123,16 @@ function cardClicked(eve){
 
 function insertMoves(){
   document.querySelector('.moves').textContent = moves;
+  switch (moves){
+    case 23 : starring(2); break;
+    case 29 : starring(1); break;
+    case 35 : starring(0); break;
+  }
+}
+
+function starring(visualStars){
+  stars -= 1;
+  const starsArr = [...document.querySelector('.stars').getElementsByTagName('li')];
+  starsArr[visualStars].firstElementChild.classList.replace('fa-star', 'fa-star-o');
+  console.log(stars);
 }
