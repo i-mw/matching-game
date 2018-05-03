@@ -94,7 +94,8 @@ function cardClicked(eve) {
       moves += 1;
       insertMoves();
     }
-    // second possibility - there was one open card before the click + I'm not clicking on the previously open card or a matched card
+    // second possibility - there was one open card before the click
+    // + I'm not clicking on the previously open card or a matched card
     else if (openCards.length === 1 && !eve.target.classList.contains('open') && !eve.target.classList.contains('match')) {
       openCards.push(eve.target);
       moves += 1;
@@ -114,23 +115,20 @@ function cardClicked(eve) {
       // the two cards are different
       else {
         openCards[1].classList.add('open');
-        // openCards[0].classList.remove('open');
-        // openCards[0].classList.add('unmatch');
-        // eve.target.classList.add('unmatch');
         openCards[0].classList.add('shake');
         openCards[1].classList.add('shake');
         oldCard = openCards[0];
         newCard = openCards[1];
         // animatation rejecting the match
         newCard.addEventListener('animationend', function() {
-          // console.log(openCard);
           oldCard.classList.remove('open', 'shake');
           newCard.classList.remove('open', 'shake');
           openCards = [];
         });
       }
     }
-    // third possibility - there was two open cards before the click and they are not matched cards - in there animation phase and was supposed to be closed
+    // third possibility - there was two open cards before the click and they are not matched card
+    // - in there animation phase and was supposed to be closed
     else {
       if (!eve.target.classList.contains('open') && !eve.target.classList.contains('match')) {
         oldCard.classList.remove('open', 'shake');
@@ -143,7 +141,6 @@ function cardClicked(eve) {
       }
     }
   }
-  console.log(moves);
 }
 
 
@@ -169,7 +166,6 @@ function starring(visualStars) {
   stars -= 1;
   const starsArr = [...document.querySelector('.stars').getElementsByTagName('li')];
   starsArr[visualStars].firstElementChild.classList.replace('fa-star', 'fa-star-o');
-  console.log(stars);
 }
 
 
