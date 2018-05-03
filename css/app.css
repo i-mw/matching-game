@@ -35,13 +35,13 @@ h1 {
  */
 
 .deck {
-  width: 660px;
-  min-height: 680px;
-  /* width: 475px;
-  min-height: 490px; */
+  /* width: 660px; */
+  /* min-height: 680px; */
+  width: 475px;
+  min-height: 490px;
   background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
-  padding: 32px;
-  /* padding: 23px; */
+  /* padding: 32px; */
+  padding: 23px;
   border-radius: 10px;
   box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
   display: flex;
@@ -52,10 +52,10 @@ h1 {
 }
 
 .deck .card {
-  height: 125px;
-  width: 125px;
-  /* height: 90px;
-  width: 90px; */
+  /* height: 125px; */
+  /* width: 125px; */
+  height: 90px;
+  width: 90px;
   background: #2e3d49;
   font-size: 0;
   color: #ffffff;
@@ -74,8 +74,8 @@ h1 {
   transform: rotateY(360deg);
   background: #02b3e4;
   cursor: default;
-  font-size: 33px;
-  /* font-size: 26px; */
+  /* font-size: 33px; */
+  font-size: 26px;
 
 }
 
@@ -87,8 +87,8 @@ h1 {
   transform: rotateY(360deg);
   cursor: default;
   background: #02ccba;
-  font-size: 33px;
-  /* font-size: 26px; */
+  /* font-size: 33px; */
+  font-size: 26px;
   /* animation: shake 0.7s cubic-bezier(.5,.5,.55,.5) both;
   transform: translate3d(0, 0, 0); */
 }
