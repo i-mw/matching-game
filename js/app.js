@@ -1,9 +1,10 @@
 /*
- * Create a list that holds all of your cards
+ * Create all variables and function calls
  */
 const container = document.querySelector('.container');
 const cards = document.getElementsByClassName('card');
 
+// replace cards with new shuffled cards
 replaceDeck();
 
 let openCards = [];
@@ -21,10 +22,17 @@ let deckContainer = document.querySelector('.container');
 let winContainer = document.querySelector('.win');
 let restartButton = winContainer.querySelector('button');
 
+
+/*
+ * Create all events listners
+ */
+ // listen for cards clicks
 container.addEventListener('click', cardClicked);
 
+// listen to reset button click
 resetButton.addEventListener('click', reset);
 
+// listen to congratulations panel resert button click
 restartButton.addEventListener('click', function() {
   deckContainer.classList.remove('hidden');
   winContainer.classList.add('hidden');
@@ -32,7 +40,10 @@ restartButton.addEventListener('click', function() {
 });
 
 
-// Shuffle function from http://stackoverflow.com/a/2450976
+/*
+ * Create all functions
+ */
+// function to shuffle cards -from http://stackoverflow.com/a/2450976-
 function shuffle(array) {
   let currentIndex = array.length,
     temporaryValue, randomIndex;
@@ -49,7 +60,7 @@ function shuffle(array) {
 }
 
 
-// Replace old elements with new shuffled elements
+// function to replace old cards with new shuffled cards
 function replaceDeck() {
   let deck = document.querySelector('.deck');
   const newDeck = document.createElement('ul');
@@ -66,32 +77,42 @@ function replaceDeck() {
 }
 
 
+// function to handle cards clicks - game logic
 function cardClicked(eve) {
+  // make sure that the click is on a card not on padding - event delegation
   if (eve.target.nodeName === 'LI') {
+    // make sure that this is the first click in the game to start the timer
     if (!clicks) {
       clicks = 1;
       timer();
       interval = window.setInterval(timer, 1000);
     }
+    // first possibility - there was no card open before the click
     if (openCards.length === 0) {
       openCards.push(eve.target);
       openCards[0].classList.add('open');
       moves += 1;
       insertMoves();
-    } else if (openCards.length === 1 && !eve.target.classList.contains('open') && !eve.target.classList.contains('match')) {
+    }
+    // second possibility - there was one open card before the click + I'm not clicking on the previously open card or a matched card
+    else if (openCards.length === 1 && !eve.target.classList.contains('open') && !eve.target.classList.contains('match')) {
       openCards.push(eve.target);
       moves += 1;
       insertMoves();
+      // the two cards are of the same shape
       if (openCards[0].firstElementChild.classList[1] === openCards[1].firstElementChild.classList[1]) {
         openCards[0].classList.remove('open');
         openCards[0].classList.add('match');
         openCards[1].classList.add('match');
         openCards = [];
         matches -= 1;
+        // wining condition - no more unmatched cards
         if (!matches) {
           win();
         }
-      } else {
+      }
+      // the two cards are different
+      else {
         openCards[1].classList.add('open');
         // openCards[0].classList.remove('open');
         // openCards[0].classList.add('unmatch');
@@ -100,15 +121,17 @@ function cardClicked(eve) {
         openCards[1].classList.add('shake');
         oldCard = openCards[0];
         newCard = openCards[1];
+        // animatation rejecting the match
         newCard.addEventListener('animationend', function() {
           // console.log(openCard);
           oldCard.classList.remove('open', 'shake');
           newCard.classList.remove('open', 'shake');
           openCards = [];
         });
-
       }
-    } else {
+    }
+    // third possibility - there was two open cards before the click and they are not matched cards - in there animation phase and was supposed to be closed
+    else {
       if (!eve.target.classList.contains('open') && !eve.target.classList.contains('match')) {
         oldCard.classList.remove('open', 'shake');
         newCard.classList.remove('open', 'shake');
@@ -124,6 +147,7 @@ function cardClicked(eve) {
 }
 
 
+// function to update moves counter in score panel
 function insertMoves() {
   document.querySelector('.moves').textContent = moves;
   switch (moves) {
@@ -140,6 +164,7 @@ function insertMoves() {
 }
 
 
+// function to update visual stars in score panel
 function starring(visualStars) {
   stars -= 1;
   const starsArr = [...document.querySelector('.stars').getElementsByTagName('li')];
@@ -148,6 +173,7 @@ function starring(visualStars) {
 }
 
 
+// function to update timer in score panel
 function timer() {
   time += 1;
   if (time < 3600) {
@@ -159,6 +185,7 @@ function timer() {
 }
 
 
+// function to reset the game
 function reset() {
   moves = 0;
   insertMoves();
@@ -175,6 +202,7 @@ function reset() {
 }
 
 
+// function to show win page
 function win() {
   clearInterval(interval);
 
