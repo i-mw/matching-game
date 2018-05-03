@@ -1,3 +1,5 @@
 # How to contribute
 
-The files in this repository are used as the starting point for all students. Because we want students to write the majority of the code themselves, pull requests (most likely) will _not_ be merged into the project.
+As this is a personal project and meant only for self improvement, most likely I'm not getting to accept pull requests.
+
+You can still make a pull request to show me some code improvements, a feature that I can add or a bug that need to be fixed.
