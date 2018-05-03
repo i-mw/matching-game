@@ -38,6 +38,11 @@ restartButton.addEventListener('click', function() {
   winContainer.classList.add('hidden');
   reset();
 });
+// listen for window resize to replace deck
+// and cards with others which have appropiate sizes- for resposiveness
+window.addEventListener('resize', function(){
+    reset();
+});
 
 
 /*
@@ -69,11 +74,24 @@ function replaceDeck() {
 
   for (let i = 0; i < array.length; i++) {
     array[i].className = 'card';
+    // make cards height equal to the width - for resposiveness
+    array[i].style.height = window.getComputedStyle(array[i]).width;
     newDeck.appendChild(array[i]);
   }
 
   container.removeChild(deck);
   container.appendChild(newDeck);
+  // if window screen < 550,
+  // make deck height 1.0316 times its width - - for resposiveness
+  if(window.innerWidth < 550){
+    let newDeckWidth = window.getComputedStyle(newDeck).width;
+    newDeckWidth =newDeckWidth.split('');
+    newDeckWidth.pop();
+    newDeckWidth.pop();
+    newDeckWidth = Number(newDeckWidth.join(''));
+
+    newDeck.style.height = newDeckWidth * 1.0316 + 'px';
+  }
 }
 
 

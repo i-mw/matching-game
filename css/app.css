@@ -38,7 +38,7 @@ h1 {
   /* width: 660px; */
   /* min-height: 680px; */
   width: 475px;
-  min-height: 490px;
+  height: 490px;
   background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
   /* padding: 32px; */
   padding: 23px;
@@ -91,13 +91,6 @@ h1 {
   font-size: 26px;
   /* animation: shake 0.7s cubic-bezier(.5,.5,.55,.5) both;
   transform: translate3d(0, 0, 0); */
-}
-
-.deck .card.unmatch {
-  transform: rotateY(180deg);
-  transition: transform 2000ms;
-  font-size: 0;
-
 }
 
 .shake {
@@ -156,8 +149,9 @@ h1 {
 
 .score-panel time {
   display: inline-block;
-  margin-right: 20px;
-  width: 100px;
+  margin-right: 22%;
+  width: 45px;
+  /* border: 1px dashed red; */
 }
 
 /*
@@ -176,7 +170,9 @@ h1 {
 .win {
     color: #02ccba;
     font-size: 20px;
-    padding-top: 150px;
+    padding-top: 100px;
+    padding-top: 15vh;
+    text-align: center;
 }
 
  .win i {
@@ -209,8 +205,42 @@ h1 {
   background-color: white;
 }
 
-/* @media screen and (max-width: 500px) {
-  h1 {
-    color: red !important;
+@media screen and (max-width: 550px) {
+  .container {
+    /* border: 1px dashed red; */
+    width: 90%;
+    margin-right: auto;
+    margin-left: auto;
   }
-} */
+
+  .deck {
+    width: 100%;
+    padding: 4.6%;
+  }
+
+  .deck .card {
+    width: 20.5%;
+  }
+
+  .score-panel {
+    width: 100%;
+  }
+
+  .score-panel time {
+    margin-right: 10%;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .deck .card.open {
+    font-size: 22px;
+  }
+
+  .deck .card.match {
+    font-size: 20px;
+  }
+
+  .score-panel time {
+    margin-right: 5px;
+  }
+}
