@@ -166,14 +166,11 @@ function cardClicked(eve) {
 function insertMoves() {
   document.querySelector('.moves').textContent = moves;
   switch (moves) {
-    case 23:
+    case 25:
       starring(2);
       break;
-    case 29:
-      starring(1);
-      break;
     case 35:
-      starring(0);
+      starring(1);
       break;
   }
 }
