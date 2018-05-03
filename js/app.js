@@ -26,7 +26,7 @@ let restartButton = winContainer.querySelector('button');
 /*
  * Create all events listners
  */
- // listen for cards clicks
+// listen for cards clicks
 container.addEventListener('click', cardClicked);
 
 // listen to reset button click
@@ -40,8 +40,8 @@ restartButton.addEventListener('click', function() {
 });
 // listen for window resize to replace deck
 // and cards with others which have appropiate sizes- for resposiveness
-window.addEventListener('resize', function(){
-    reset();
+window.addEventListener('resize', function() {
+  reset();
 });
 
 
@@ -83,9 +83,9 @@ function replaceDeck() {
   container.appendChild(newDeck);
   // if window screen < 550,
   // make deck height 1.0316 times its width - - for resposiveness
-  if(window.innerWidth < 550){
+  if (window.innerWidth < 550) {
     let newDeckWidth = window.getComputedStyle(newDeck).width;
-    newDeckWidth =newDeckWidth.split('');
+    newDeckWidth = newDeckWidth.split('');
     newDeckWidth.pop();
     newDeckWidth.pop();
     newDeckWidth = Number(newDeckWidth.join(''));
