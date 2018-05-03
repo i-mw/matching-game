@@ -222,7 +222,7 @@ function win() {
 
   let movesSpan = winContainer.querySelector('.moves');
   let starsSpan = winContainer.querySelector('.stars');
-  let scorePanelTime = document.querySelector('time');
+  let scorePanelTime = document.querySelector('.score-panel-time');
   let timeSpan = winContainer.querySelector('.time');
   let tempMinIndicator;
 
